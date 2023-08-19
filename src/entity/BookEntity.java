@@ -1,15 +1,12 @@
 package entity;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -18,25 +15,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
 @Entity
-@Table(name = "student")
-public class StudentEntity {
+@Table(name = "book")
+public class BookEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String name;
+    private String auther;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "laptop_id", nullable = false)
-    private LaptopEntity laptopEntity;
-
-    @OneToMany(mappedBy = "studentEntity", targetEntity = BookEntity.class)
-    List<BookEntity> bookEntities;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_id", nullable = false)
+    private StudentEntity studentEntity;
 }
